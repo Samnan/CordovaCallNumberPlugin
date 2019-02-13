@@ -4,6 +4,10 @@ CallNumber.prototype.callNumber = function(success, failure, number, bypassAppCh
     cordova.exec(success, failure, "CallNumber", "callNumber", [number, bypassAppChooser]);
 };
 
+CallNumber.prototype.dialNumber = function(success, failure, number, bypassAppChooser) {
+    cordova.exec(success, failure, "CallNumber", "dialNumber", [number, bypassAppChooser]);
+};
+
 CallNumber.prototype.isCallSupported = function(success, failure) {
     cordova.exec(success, failure, "CallNumber", "isCallSupported");
 }
