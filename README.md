@@ -19,12 +19,14 @@ ionic cordova plugin add cordova-plugin-os-call-number
 Use the plugin in your JS file:
 ``` javascript
 window.plugins.CallNumber.callNumber(onSuccess, onError, number, bypassAppChooser);
+window.plugins.CallNumber.dialNumber(onSuccess, onError, number, bypassAppChooser);
 ```
 Or by importing it as a Module
 ``` javascript
 import { CallNumber } from 'cordova-plugin-os-call-number';
 
 CallNumber.callNumber(onSuccess, onError, number, bypassAppChooser);
+CallNumber.dialNumber(onSuccess, onError, number, bypassAppChooser);
 ```
 
 **number:** *String;* phone number to call (e.g. "1234567890")

@@ -16,7 +16,8 @@ import android.telephony.TelephonyManager;
 import android.content.pm.PackageManager;
 
 public class CFCallNumber extends CordovaPlugin {
-  public static final int CALL_REQ_CODE = 0;
+  public static final int CALL_REQ_CODE_CALL = 0;
+  public static final int CALL_REQ_CODE_DIAL = 1;
   public static final int PERMISSION_DENIED_ERROR = 20;
   public static final String CALL_PHONE = Manifest.permission.CALL_PHONE;
 
@@ -34,11 +35,18 @@ public class CFCallNumber extends CordovaPlugin {
 
     if (action.equals("callNumber")) {
       if (cordova.hasPermission(CALL_PHONE)) {
-        callPhone(executeArgs);
+        callPhone(executeArgs, true);
       } else {
-        getCallPermission(CALL_REQ_CODE);
+        getCallPermission(CALL_REQ_CODE_CALL);
       }
       return true;
+    } else if (action.equals("dialNumber")) {
+        if (cordova.hasPermission(CALL_PHONE)) {
+          callPhone(executeArgs, false);
+        } else {
+          getCallPermission(CALL_REQ_CODE_DIAL);
+        }
+        return true;
     } else if (action.equals("isCallSupported")) {
       this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, isTelephonyEnabled()));
       return true;
@@ -57,13 +65,16 @@ public class CFCallNumber extends CordovaPlugin {
       }
     }
     switch (requestCode) {
-      case CALL_REQ_CODE:
-        callPhone(executeArgs);
+      case CALL_REQ_CODE_CALL:
+        callPhone(executeArgs, true);
+        break;
+      case CALL_REQ_CODE_DIAL:
+        callPhone(executeArgs, false);
         break;
     }
   }
 
-  private void callPhone(JSONArray args) throws JSONException {
+  private void callPhone(JSONArray args, boolean directCall) throws JSONException {
     String number = args.getString(0);
     number = number.replaceAll("#", "%23");
 
@@ -71,7 +82,7 @@ public class CFCallNumber extends CordovaPlugin {
       number = String.format("tel:%s", number);
     }
     try {
-      Intent intent = new Intent(isTelephonyEnabled() ? Intent.ACTION_CALL : Intent.ACTION_VIEW);
+      Intent intent = new Intent((isTelephonyEnabled() && directCall) ? Intent.ACTION_CALL : Intent.ACTION_VIEW);
       intent.setData(Uri.parse(number));
 
       boolean bypassAppChooser = Boolean.parseBoolean(args.getString(1));

@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-os-call-number",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Call Number Plugin for Cordova Apps",
   "cordova": {
     "id": "cordova-plugin-os-call-number",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oneserve/CordovaCallNumberPlugin.git"
+    "url": "git+https://github.com/italrap/CordovaCallNumberPlugin.git"
   },
   "keywords": [
     "cordova",
@@ -26,8 +26,8 @@
   "author": "",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/oneserve/CordovaCallNumberPlugin/issues"
+    "url": "https://github.com/italrap/CordovaCallNumberPlugin/issues"
   },
-  "homepage": "https://github.com/oneserve/CordovaCallNumberPlugin#readme",
+  "homepage": "https://github.com/italrap/CordovaCallNumberPlugin#readme",
   "module": "index.js"
 }

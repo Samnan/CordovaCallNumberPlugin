@@ -28,4 +28,11 @@ export declare class CallNumber extends IonicNativePlugin {
      * @return {Promise<any>}
      */
     callNumber(numberToCall: string, bypassAppChooser: boolean): Promise<any>;
+    /**
+     * Opens dialer whith phone number
+     * @param numberToCall {string} The phone number to call as a string
+     * @param bypassAppChooser {boolean} Set to true to bypass the app chooser and go directly to dialer
+     * @return {Promise<any>}
+     */
+    dialNumber(numberToCall: string, bypassAppChooser: boolean): Promise<any>;
 }
